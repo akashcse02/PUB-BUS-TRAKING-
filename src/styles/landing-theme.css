@@ -1,0 +1,205 @@
+/* ---------- PUBTrack theme — Transit-app inspired ---------- */
+
+:root {
+  --pub-bg: #ffffff;
+  --pub-surface: #f3f6f8;
+  --pub-surface-2: #e8eef2;
+  --pub-ink: #0d1b1e;
+  --pub-ink-dim: #5c6b70;
+  --pub-line: rgba(13, 27, 30, 0.1);
+
+  --pub-green: #00c56c;
+  --pub-green-dark: #009a54;
+  --pub-green-soft: #d6f7e7;
+
+  --pub-route-1: #00c56c;
+  --pub-route-2: #2d9cdb;
+  --pub-route-3: #ff6b35;
+  --pub-route-4: #9b51e0;
+
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--pub-bg);
+  color: var(--pub-ink);
+  font-family: var(--font-body);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ---------- Live map animation ---------- */
+
+.map-street {
+  stroke: rgba(13, 27, 30, 0.09);
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.map-street-minor {
+  stroke: rgba(13, 27, 30, 0.05);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.map-water {
+  fill: #dcecf5;
+}
+
+.map-block {
+  fill: rgba(13, 27, 30, 0.035);
+}
+
+.route-casing {
+  fill: none;
+  stroke: rgba(13, 27, 30, 0.12);
+  stroke-width: 12;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.route-line {
+  fill: none;
+  stroke: var(--pub-green);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.route-flow {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 8 18;
+  opacity: 0.85;
+  animation: dash-flow 1.4s linear infinite;
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -52; }
+}
+
+.bus-marker {
+  offset-path: path("M 60 250 C 150 250 170 130 260 130 C 350 130 370 250 470 250 C 560 250 590 90 700 90");
+  offset-rotate: auto;
+  animation: bus-drive 14s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes bus-drive {
+  0%   { offset-distance: 0%; }
+  48%  { offset-distance: 100%; }
+  52%  { offset-distance: 100%; }
+  100% { offset-distance: 0%; }
+}
+
+.gps-ring {
+  transform-origin: center;
+  animation: ping-ring 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping-ring {
+  0%   { transform: scale(0.5); opacity: 0.55; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+.stop-pulse {
+  transform-origin: center;
+  animation: stop-pulse 2.6s ease-in-out infinite;
+}
+
+@keyframes stop-pulse {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 1; }
+}
+
+/* ---------- Interaction ---------- */
+
+.pub-card {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.pub-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -22px rgba(13, 27, 30, 0.45);
+  border-color: var(--pub-green);
+}
+
+.pub-btn {
+  transition: transform 0.18s cubic-bezier(0.2, 0.8, 0.3, 1), background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pub-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -14px rgba(0, 197, 108, 0.9);
+}
+
+.pub-btn:active {
+  transform: translateY(0);
+}
+
+.pub-nav-link {
+  position: relative;
+}
+
+.pub-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 2px;
+  width: 100%;
+  background: var(--pub-green);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.pub-nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- Scroll reveal ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: reveal-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes reveal-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-flow,
+  .bus-marker,
+  .gps-ring,
+  .stop-pulse,
+  .reveal {
+    animation: none !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
