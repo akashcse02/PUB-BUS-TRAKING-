@@ -15,7 +15,7 @@ export default function HeroSection() {
           </div>
 
           <h1 className="reveal font-display text-4xl md:text-6xl font-bold text-[#0d1b1e] leading-[1.05]">
-            Know exactly where your bus is.
+            PUB Bus location Detec
           </h1>
 
           <p

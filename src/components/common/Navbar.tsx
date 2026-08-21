@@ -30,10 +30,10 @@ export default function Navbar() {
     >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
         <a href="#" className="flex items-center gap-2 font-display font-bold text-lg text-[#0d1b1e]">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#00c56c]">
-            <MapPin size={17} className="text-white" />
-          </span>
-          PUBTrack
+          
+            <img src="/logo.png"alt="Logo" className="w-[20px] h-[20px] object-contain"/>
+        
+          PUB BUS TRACKER
         </a>
 
         <div className="hidden md:flex items-center gap-8">
