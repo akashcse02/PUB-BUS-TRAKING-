@@ -2,11 +2,11 @@
 
 hi
 
-This project was built with VS-code
+This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Continue developing this project in the VS-code
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/9b2560ba-1885-427e-9211-fb731b1f2533).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
 - **Stay in sync**: every change made in Lovable is committed straight to this repository.

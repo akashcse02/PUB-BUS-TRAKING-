@@ -15,38 +15,37 @@ export default function Navbar() {
   const { user, signOut } = useAuth();
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 24);
-    };
-
+    const onScroll = () => setScrolled(window.scrollY > 24);
     window.addEventListener('scroll', onScroll);
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   return (
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-white/90 backdrop-blur border-b border-[#0d1b1e]/10 shadow-lg'
+          ? 'bg-white/90 backdrop-blur border-b border-[#0d1b1e]/8 shadow-[0_10px_30px_-24px_rgba(13,27,30,0.6)]'
           : 'bg-transparent'
-      }`}>
+      }`}
+    >
       <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
-        <a
-          href="#"
-          className="flex items-center gap-2 font-bold text-lg text-[#0d1b1e]">
+        <a href="#" className="flex items-center gap-2 font-display font-bold text-lg text-[#0d1b1e]">
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#00c56c]">
             <MapPin size={17} className="text-white" />
           </span>
           PUBTrack
         </a>
-        
-        <div className="hidden md:flex items-center gap-8"> 
-          {NAV_LINKS.map((link) => ( <a key={link.href} 
-          href={link.href}className="text-sm font-medium text-[#5c6b70] 
-          hover:text-[#00c56c] transition-colors">{link.label} </a> ))}
+
+        <div className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="pub-nav-link text-sm font-medium text-[#5c6b70] hover:text-[#0d1b1e] transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
 
         <div className="hidden md:flex items-center gap-3">
@@ -54,29 +53,28 @@ export default function Navbar() {
             <>
               <Link
                 to="/dashboard"
-                className="text-sm font-medium text-[#0d1b1e] hover:text-[#00c56c]">
+                className="text-sm font-medium text-[#0d1b1e] hover:text-[#00c56c] transition-colors"
+              >
                 Dashboard
               </Link>
-
-              <buttontype="button"
+              <button
                 onClick={() => signOut()}
-                className="text-sm font-semibold px-5 py-2.5 rounded-full border-2 border-black/10">
+                className="pub-btn text-sm font-semibold px-5 py-2.5 rounded-full border-2 border-[#0d1b1e]/12 text-[#0d1b1e] hover:border-[#00c56c]"
+              >
                 Sign out
               </button>
-
-               </>
+            </>
           ) : (
             <>
               <Link
                 to="/auth"
-                className="text-sm font-medium text-[#0d1b1e] hover:text-[#00c56c]"
+                className="text-sm font-medium text-[#0d1b1e] hover:text-[#00c56c] transition-colors"
               >
                 Login
               </Link>
-
               <Link
                 to="/auth"
-                className="text-sm font-semibold px-5 py-2.5 rounded-full bg-[#00c56c] text-white hover:bg-[#009a54]"
+                className="pub-btn text-sm font-semibold px-5 py-2.5 rounded-full bg-[#00c56c] text-white hover:bg-[#009a54]"
               >
                 Sign Up
               </Link>
@@ -85,9 +83,8 @@ export default function Navbar() {
         </div>
 
         <button
-          type="button"
           className="md:hidden text-[#0d1b1e]"
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -95,45 +92,26 @@ export default function Navbar() {
       </nav>
 
       {open && (
-        <div className="md:hidden px-6 pb-4 flex flex-col gap-4 bg-white border-b border-black/10">
+        <div className="md:hidden px-6 pb-4 flex flex-col gap-4 bg-white border-b border-[#0d1b1e]/8">
           {NAV_LINKS.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-[#5c6b70]"
-              onClick={() => setOpen(false)}
-            >
+            <a key={link.href} href={link.href} className="text-sm font-medium text-[#5c6b70]">
               {link.label}
             </a>
           ))}
-
           <div className="flex items-center gap-3 pt-2">
             {user ? (
               <>
-                <Link
-                  to="/dashboard"
-                  className="text-sm font-medium text-[#0d1b1e]"
-                >
-                  Dashboard
-                </Link>
-
+                <Link to="/dashboard" className="text-sm font-medium text-[#0d1b1e]">Dashboard</Link>
                 <button
-                  type="button"
                   onClick={() => signOut()}
-                  className="text-sm font-semibold px-5 py-2.5 rounded-full border-2 border-black/10"
+                  className="text-sm font-semibold px-5 py-2.5 rounded-full border-2 border-[#0d1b1e]/12 text-[#0d1b1e]"
                 >
                   Sign out
                 </button>
               </>
             ) : (
               <>
-                <Link
-                  to="/auth"
-                  className="text-sm font-medium text-[#0d1b1e]"
-                >
-                  Login
-                </Link>
-
+                <Link to="/auth" className="text-sm font-medium text-[#0d1b1e]">Login</Link>
                 <Link
                   to="/auth"
                   className="text-sm font-semibold px-5 py-2.5 rounded-full bg-[#00c56c] text-white"
